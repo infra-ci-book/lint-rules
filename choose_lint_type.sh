@@ -28,8 +28,8 @@ function exec-lint () {
         * ) echo ${fpath:?}: There is no matching lint test for this file type. ;;
     esac
 
-    if [ $? =! 0 ]; then
-        exit 1
+    if [ $? != 0 ]; then
+        exit $?
     fi
 }
 
