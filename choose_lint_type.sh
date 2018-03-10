@@ -27,6 +27,10 @@ function exec-lint () {
         "yml" | "yaml" ) ansible-lint -c lint-rules/rules/ansible/.ansible-lint ${fpath}  ;;
         * ) echo ${fpath:?}: There is no matching lint test for this file type. ;;
     esac
+
+    if [ $? =! 0 ]; then
+        exit 1
+    fi
 }
 
 # lint 実行
