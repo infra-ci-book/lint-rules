@@ -10,13 +10,6 @@ if [ "${flist}" = "" ]; then
     exit 0
 fi
 
-# lint 実行
-for i in ${flist:?}
-do
-    exec-lint ${i}
-done
-
-
 function exec-lint () {
     # 引数にファイルを受け取る
     fpath=${1:?}
@@ -35,3 +28,9 @@ function exec-lint () {
         * ) echo ${ftype:?}: There is no matching lint test for this file type. ;;
     esac
 }
+
+# lint 実行
+for i in ${flist:?}
+do
+    exec-lint ${i}
+done
