@@ -26,6 +26,7 @@ function exec-lint () {
     case "$ftype" in
         "yml" | "yaml" )
             ansible-lint -c lint-rules/rules/ansible/.ansible-lint ${fpath}
+            # エラーが発生した場合はフラグを1へ
             if [ $? != 0 ]; then ERROR=1; fi
             ;;
         * )

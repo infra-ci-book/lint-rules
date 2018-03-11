@@ -1,7 +1,6 @@
 parseable: true
 quiet: false
+rulesdir:
+  - ./rules
 use_default_rules: true
-#skip_list:
-#  - 
 verbosity: 1
-
