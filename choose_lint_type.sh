@@ -26,7 +26,7 @@ function exec-lint () {
     case "$ftype" in
         "yml" | "yaml" )
             ansible-lint -c lint-rules/rules/ansible/.ansible-lint ${fpath}
-            if [ $? != 0 ]; then exit $?; fi
+            if [ $? != 0 ]; then ERROR=1; fi
             ;;
         * )
             echo ${fpath:?}: There is no matching lint test for this file type.
@@ -36,7 +36,17 @@ function exec-lint () {
 }
 
 # lint 実行
+ERROR=0
 for i in ${flist:?}
 do
     exec-lint ${i}
 done
+
+# Error が合った場合には異常終了
+if [ ${ERROR:?} != 0 ]; then
+    echo Detected error when Lint checking
+    exit 1
+fi
+
+# 正常終了
+exit 0
