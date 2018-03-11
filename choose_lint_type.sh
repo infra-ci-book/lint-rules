@@ -3,12 +3,19 @@
 # 変更ファイルを抽出する
 flist=`git diff --name-only --diff-filter=ACM origin/master...HEAD`
 echo ${flist}
+echo "---------------------"
 
 # 変更ファイルが0の時は終了
 if [ "${flist}" = "" ]; then
     echo There is no file in this commint.
     exit 0
 fi
+
+
+# エラーフラグを立てる
+function error-detect () {
+    ERROR=1
+}
 
 function exec-lint () {
     # 引数にファイルを受け取る
@@ -25,9 +32,7 @@ function exec-lint () {
     # 拡張子ごとに lint を実行する
     case "$ftype" in
         "yml" | "yaml" )
-            ansible-lint -c lint-rules/rules/ansible/.ansible-lint ${fpath}
-            # エラーが発生した場合はフラグを1へ
-            if [ $? != 0 ]; then ERROR=1; fi
+            ansible-lint -c lint-rules/rules/ansible/.ansible-lint ${fpath} || error-detect
             ;;
         * )
             echo ${fpath:?}: There is no matching lint test for this file type.
