@@ -1,6 +1,6 @@
 parseable: true
 quiet: false
 rulesdir:
-  - ./rules
+  - lint-rules/rules/ansible/rules
 use_default_rules: true
 verbosity: 1
