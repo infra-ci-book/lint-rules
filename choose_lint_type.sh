@@ -48,6 +48,8 @@ do
     exec-lint ${i}
 done
 
+echo "---------------------"
+
 # Error が合った場合には異常終了
 if [ ${ERROR:?} != 0 ]; then
     echo Detected error when Lint checking
