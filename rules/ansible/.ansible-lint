@@ -2,5 +2,7 @@ parseable: true
 quiet: false
 rulesdir:
   - lint-rules/rules/ansible/rules
+skip_list:
+  - ANSIBLE0006
 use_default_rules: true
 verbosity: 1
