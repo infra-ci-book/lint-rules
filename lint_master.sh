@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # ファイル一覧の作成
-flist=`find .`
+flist=`find . -type f`
 
 # 除外ファイル（スペース区切り）
-excludes=".gitlab-ci.yml .travis.yml"
+excludes=".gitlab-ci.yml .travis.yml /.git/ /lint-rules/"
 
 # 対象ファイルが0の時は終了
 if [ "${flist}" = "" ]; then

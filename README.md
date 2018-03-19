@@ -10,24 +10,48 @@ lint-rules is a dispacher script of LINT.
 
 ## Usage
 
+Apply lint to all files
 ```shell
 git clone https://github.com/infra-ci-book/lint-rules.git
-lint-rules/choose_lint_type.sh
+lint-rules/lint_master.sh
+```
+
+Apply lint to branch files
+```shell
+git clone https://github.com/infra-ci-book/lint-rules.git
+lint-rules/lint_branches.sh
 ```
 
 ## Ex) GitLab CI
 
 ```yaml
-lint-job:
+Lint_Check_Master:
   stage: lint
   image:
     name: irixjp/lint-rules:latest
     entrypoint: [""]
   script:
     - git clone https://github.com/infra-ci-book/lint-rules.git
-    - lint-rules/choose_lint_type.sh
+    - lint-rules/lint_master.sh
+  only:
+    - master
   tags:
-   - docker
+    - docker
+
+Lint_Check_Branches:
+  stage: lint
+  image:
+    name: irixjp/lint-rules:latest
+    entrypoint: [""]
+  script:
+    - git clone https://github.com/infra-ci-book/lint-rules.git
+    - lint-rules/lint_branches.sh
+  only:
+    - branches
+  except:
+    - master
+  tags:
+    - docker
 ```
 
 ## Test list
