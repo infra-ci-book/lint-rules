@@ -1,16 +1,26 @@
 #!/bin/bash
 
-# 変更ファイルを抽出する
-flist=`git diff --name-only --diff-filter=ACM origin/master...HEAD`
-echo ${flist}
-echo "---------------------"
+# ファイル一覧の作成
+flist=`find .`
 
-# 変更ファイルが0の時は終了
+# 除外ファイル（スペース区切り）
+excludes=".gitlab-ci.yml .travis.yml"
+
+# 対象ファイルが0の時は終了
 if [ "${flist}" = "" ]; then
     echo There is no file in this commint.
     exit 0
 fi
 
+# 除外ファイルを削除する
+for i in ${excludes:?}
+do
+    flist=`echo "${flist:?}" | grep -v "${i:?}"`
+done
+
+# LINT対象ファイル一覧を出力
+echo "${flist}"
+echo "---------------------"
 
 # エラーフラグを立てる
 function error-detect () {
