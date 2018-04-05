@@ -1,0 +1,8 @@
+- hosts: localhost
+  connection: local
+  tasks:
+  - shell: ps |grep -v grep
+    register: result
+    changed_when: false
+
+  - debug: var=result.stdout_lines

@@ -1,0 +1,11 @@
+- name: get process list
+  hosts: localhost
+  connection: local
+  tasks:
+  - name: exec ps command
+    shell: ps |grep -v grep
+    register: result
+    changed_when: false
+
+  - name: display process list
+    debug: var=result.stdout_lines
