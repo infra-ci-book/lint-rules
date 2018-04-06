@@ -1,8 +1,8 @@
 FROM centos:7
 ENV container docker
 
-ANSIBLE_VERSION=2.4.2.0
-LINT_VERSION=3.4.21
+ENV ANSIBLE_VERSION 2.4.2.0
+ENV LINT_VERSION 3.4.21
 
 RUN yum install -y epel-release && \
     yum install -y git && \
