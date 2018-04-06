@@ -1,7 +1,11 @@
 FROM centos:7
 ENV container docker
 
+ANSIBLE_VERSION=2.4.2.0
+LINT_VERSION=3.4.21
+
 RUN yum install -y epel-release && \
     yum install -y git && \
-    yum install -y gcc make python-devel python-pip && \
-    pip install ansible==2.4.3.0 ansible-lint==3.4.20
+    yum install -y ansible-${ANSIBLE_VERSION:?} && \
+    yum install -y ansible-lint-${LINT_VERSION:?} && \
+    yum clean all
