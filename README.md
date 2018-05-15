@@ -88,3 +88,7 @@ Lint_Check_Branches:
   - become_user without become will not actually change user
 - ANSIBLE0018: Deprecated always_run
   - Instead of always_run, use check_mode.
+
+## Docker build status
+
+- https://hub.docker.com/r/irixjp/lint-rules/builds/
